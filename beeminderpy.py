@@ -1,6 +1,6 @@
 import urllib
-import urllib2
-import settings
+import urllib.request as urllib2
+#import settings
 
 # based on https://www.beeminder.com/api
 
@@ -37,9 +37,9 @@ class Beeminder:
 
   def call_api(self,url,values,method='GET'):
     result=''
-    data = urllib.urlencode(values)
+    data = urllib.parse.urlencode(values)
     if method=='POST':
-      req = urllib2.Request(url,data)
+      req = urllib2.Request(url,data.encode())
       response = urllib2.urlopen(req)
     else:
       response = urllib2.urlopen(url+'?'+data)
